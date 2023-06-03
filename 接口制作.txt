@@ -1,0 +1,217 @@
+订阅教程
+订阅教程
+
+
+简单说明
+
+格式链接 https://zhuijuren.app/api.json
+
+其中 dyname 和 dyzuozhe 必填 整体是Map类型
+
+apiyuan webyuan zhanyuan 是List类型 里面是对应的规则
+
+1、api源
+
+   {
+
+    "name": "ceshi",
+
+    "searchurl": "http://xxx.com/api.php/provide/vod/?ac=detail&wd=",
+
+    "searchua": "User-Agent#Mozilla/5.0 (Linux; Android 12; Redmi K30 Pro Build/SKQ1.220303.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36",
+
+    "detailurl": "http://xxx.com/api.php/provide/vod/?ac=detail&ids=",
+
+    "detailua": "User-Agent#Mozilla/5.0 (Linux; Android 12; Redmi K30 Pro Build/SKQ1.220303.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36",
+
+    "shenhe": 0
+
+  }
+
+字段详解：
+
+name  顾名思义 源的名字
+
+searchurl  搜索接口api
+
+注释：目前支持 苹果cms 小龟app 萝卜白菜app
+
+苹果cms接口例子
+
+www.xxx.com/api.php/provide/vod/?detail&wd=
+
+小龟例子
+
+www.xxx.com/xgapp.php/v2/search?text=
+
+www.xxx.com/xgapp.php/v3/search?text=
+
+www.xxx.com/xgapp.php/v4/search?text=
+
+www.xxx.com/xgapp.php/v5/search?text=
+
+萝卜白菜例子
+
+www.xxx.com/api.php/v1.vod?wd=
+
+searchua 搜索请求ua 可复制上面的
+
+detailurl 播放详情接口
+
+注释：目前支持 苹果cms 小龟app 萝卜白菜app
+
+苹果cms接口例子
+
+www.xxx.com/api.php/provide/vod/?detail&ids=
+
+小龟例子
+
+www.xxx.com/xgapp.php/v2/video_detail?id=
+
+www.xxx.com/xgapp.php/v3/video_detail?id=
+
+www.xxx.com/xgapp.php/v4/video_detail?id=
+
+www.xxx.com/xgapp.php/v5/video_detail?id=
+
+萝卜白菜例子
+
+www.xxx.com/api.php/v1.vod/detail?vod_id=
+
+detailua 详情请求ua 可复制上面的
+
+
+2、网页源制作
+
+网页源爬虫基于xpath 制作 所以制作网页源需要有一定的xpath基础 其实也还是很简单的
+
+Map示例
+
+{
+
+    "name": "花猫TV111",
+
+    "searchUrl": "http://www.huamaotv.com",
+
+    "searchUA": "User-Agent#Mozilla/5.0 (Linux; Android 12; Redmi K30 Pro Build/SKQ1.220303.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36",
+
+    "playUA": "User-Agent#Mozilla/5.0 (Linux; Android 12; Redmi K30 Pro Build/SKQ1.220303.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36",
+
+    "websearchurl": "http://www.huamaotv.com/index.php?m=vod-search&wd=",
+
+    "searchapi": "",
+
+    "searchname": "//h4[@class=&&&stui-vodlist__title&&&]/a/@title",
+
+    "searchid": "//li[@class=&&&stui-vodlist__item&&&]/a/@href",
+
+    "searchpic": "//a[@class=&&&stui-vodlist__thumb lazyload&&&]/@data-original",
+
+    "searchstarr": "//span[@class=&&&pic-text&&&]/text()",
+
+    "detaillist": "//ul[@class=&&&stui-content__playlist clearfix&&&]",
+
+    "detailxl": "//div[@class=&&&stui-pannel__head clearfix&&&]/h3/text()",
+
+    "detailjs": "//li/a/text()",
+
+    "detailjsurl": "//li/a/@href"
+
+  }
+
+注意！ xpath规则中的 ”“ 双引号需要用&&&代替 ”“ 写成 &&& &&&
+
+字段说明
+
+name 毋庸置疑 源名字
+
+searchUrl 网站的主域名 结尾不带 /
+
+searchUA 搜索请求ua
+
+playUA 详情请求ua   ua必填不然会被某些网站拦截
+
+websearchurl 网页的搜索链接
+
+searchapi 不用管
+
+searchname 搜索页名字的xpath规则
+
+searchid 搜索页跳转详情页链接的xpath规则
+
+searchpic 搜索页图片的xpath规则
+
+searchstar 搜索页介绍的xpath规则
+
+detaillist 播放页播放源的 xpath 集合 注意这里是集合
+
+detailxl  播放页线路名称的xpath 规则
+
+detailjs 播放页集数的xpath规则 注意此规则在detaillist的基础上
+
+detailurl 播放页集数url的xpath规则 注意此规则在detaillist的基础上
+
+3、webyuan
+
+
+{
+
+      "name": "厂长电影",
+
+      "playtext": "",
+
+      "url": "https://www.czzzu.com/?s=",
+
+      "imgurl": "https://i1.wp.com/img.py1080p.com//2021/08/19dc1c424e7c33.png",
+
+      "type": 0,
+
+      "detailtext": "movie",
+
+      "uatext": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+
+      "searchname": "//div[@class=&&&moviedteail_tt&&&]/h1/text()",
+
+      "searchpic": "//div[@class=&&&dyimg fl&&&]/img/@src",
+
+      "detaillist": "//div[@class=&&&paly_list_btn&&&]",
+
+      "detailxl": "//div[@class=&&&mi_ne_kd&&&]/div[@class=&&&ypxingq_t&&&]/span/text()",
+
+      "detailjs": "//a/text()",
+
+      "detailjsurl": "//a/@href"
+
+    },
+
+name 源名称
+
+playtext 是bf页面的路径 www.xxx.com/vodplay/32323.html 此处就是 vodplay
+
+url 搜索接口
+
+imgurl 和type不要管
+
+detail 是详情页面的路径 www.xxx.com/voddetail/32323.html 此处就是 voddetail
+
+uatext  请求ua
+
+searchname  详情页的名字xpath规则
+
+searchpic 详情页的图片 此处和站源的区别是 都是详情页面的规则 没有搜索页
+
+detaillist 播放页播放源的 xpath 集合 注意这里是集合
+
+detailxl  播放页线路名称的xpath 规则
+
+detailjs 播放页集数的xpath规则 注意此规则在detaillist的基础上
+
+detailurl 播放页集数url的xpath规则 注意此规则在detaillist的基础上
+
+
+api ---- 接口   zhanyuan ---不需验证码的网站  webyuan  需要验证码的网站
+
+
+
+
+至此 教程简单结束 以后会补充 不懂得去粉丝群询问
